@@ -53,7 +53,7 @@ async function convert_gdoc(url) {
 				const key = text
 					.replace(/^.*?([\w\d\s\-]+).*$/, "$1")
 					.trim()
-					.replaceAll(/[\s_]+/g, "-")
+					.replace(/[\s_]+/g, "-")
 					.toLowerCase();
 				if (!key) throw `Can't find a key for ${href} with "${text.slice(10)}...`
 				loc = '/' + key
