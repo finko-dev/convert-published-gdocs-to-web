@@ -45,6 +45,10 @@ async function convert_gdoc(url) {
 			} else {
 				// if page info is not in a list
 				const text = ref.text()
+				console.log("text: ", text);
+				if (!text) {
+					console.log(ref);
+				}
 				// use head of strings as a key/location
 				const key = text
 					.replace(/^.*?([\w\d\s\-]+).*$/, "$1")
