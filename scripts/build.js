@@ -85,7 +85,7 @@ async function main() {
 	// save yaml file as a reference
 	config.pageList = urlList.map(item => glinks[item])
 	console.log(config.pageList)
-	fs.writeFileSync('./page-list.generated.yml', yaml.dump(config))
+	fs.writeFileSync('./_config.generated.yml', yaml.dump(config))
 	// save yaml of url mappings for fallback plan
 	fs.writeFileSync(path.join(DIST, 'url-mappings.yml.txt'), yaml.dump(config.pageList))
 }
