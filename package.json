@@ -2,7 +2,7 @@
   "name": "convert-published-gdocs-to-web",
   "version": "0.0.1",
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "node scripts/build-redirect.js"
   },    
   "dependencies": {
     "axios": "^0.24.0",
