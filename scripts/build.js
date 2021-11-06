@@ -89,6 +89,8 @@ async function main() {
 	pageList.pageList = urlList.map(item => glinks[item])
 	console.log(pageList)
 	fs.writeFileSync('./page-list.generated.yml', yaml.dump(pageList))
+	// save yaml of url mappings for fallback plan
+	fs.writeFileSync(path.join(DIST, 'url-mappings.yml.txt'), yaml.dump(pageList.pageList))
 }
 
 // RUN!!
