@@ -10,7 +10,8 @@
 1. GitHub push : 이 리포지터리의 main 브랜치에 push 가 발생하면 자동으로 빌드/배포 합니다.
 2. Manual build in Cloudflare Pages : Cloudflare Pages 대시보드에서 수동으로 빌드/배포할 수 있습니다.
 3. Cloudflare Pages 빌드 API: Deploy hooks을 사용하여 빌드/배포 트리거가 가능합니다.
-
+* PR 을 만들면 자동으로 프리뷰가 생성됩니다. 궁금하시면 PR을!
+ 
 ## `build.js` 기능
 1. 각 페이지의 Google Docs 웹배포 링크들을 조사해서 자동으로 url mapping / 수정
 2. `page-list.yaml` 에 수동 매핑을 등록할 수 있습니다.
