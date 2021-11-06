@@ -4,14 +4,11 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 const yaml = require('js-yaml');
 
-// output directory
-DIST = 'dist'
-// BASE URL
-BASE = ''
-
-const pageList = yaml.load(fs.readFileSync('./page-list.yml'));
-const glinks = pageList.pageList.reduce((o,n) => ({...o, [n.url]: n}), {})
-const urlList = pageList.pageList.map(item => item.url);
+const config = yaml.load(fs.readFileSync('_config.yml'));
+const DIST = config.output || 'dist';
+const BASE = config.base || '';
+const glinks = config.pageList.reduce((o,n) => ({...o, [n.url]: n}), {})
+const urlList = config.pageList.map(item => item.url);
 const queue = urlList.slice();
 const done = {};
 const matchedStr = m => m ? m[0] : "";
@@ -86,11 +83,11 @@ async function main() {
 		await convert_gdoc(queue.shift())
 	}
 	// save yaml file as a reference
-	pageList.pageList = urlList.map(item => glinks[item])
-	console.log(pageList)
-	fs.writeFileSync('./page-list.generated.yml', yaml.dump(pageList))
+	config.pageList = urlList.map(item => glinks[item])
+	console.log(config.pageList)
+	fs.writeFileSync('./_config.generated.yml', yaml.dump(config))
 	// save yaml of url mappings for fallback plan
-	fs.writeFileSync(path.join(DIST, 'url-mappings.yml.txt'), yaml.dump(pageList.pageList))
+	fs.writeFileSync(path.join(DIST, 'url-mappings.yml.txt'), yaml.dump(config.pageList))
 }
 
 // RUN!!
