@@ -77,17 +77,31 @@ async function convert_gdoc(url) {
 	}
 }
 
-async function main() {
-	// handle queue
+// handle queue
+async function runQueue() {
 	while (queue.length !== 0) {
 		await convert_gdoc(queue.shift())
 	}
+}
+
+// Post Build
+async function postBuild() {
 	// save yaml file as a reference
 	config.pageList = urlList.map(item => glinks[item])
 	console.log(config.pageList)
 	fs.writeFileSync('./_config.generated.yml', yaml.dump(config))
 	// save yaml of url mappings for fallback plan
 	fs.writeFileSync(path.join(DIST, 'url-mappings.yml.txt'), yaml.dump(config.pageList))
+}
+
+async function main() {
+	try {
+		await runQueue();
+		await postBuild();
+	} catch (err) {
+		console.error(err);
+		process.exit(err?.errno || 1);
+	}
 }
 
 // RUN!!
