@@ -5,6 +5,11 @@
 * 구글독: https://finlan.finko.dev
 * 결과물: https://life.finko.dev
 
+## 사용하는 서비스
+* GitHub : build script hosting
+* Cloudflare DNS
+* Cloudflare Pages : static-site hosting, Site build(CI/CD)
+
 ## 재배포 방법
 세 가지 방법으로 Cloudflare Pages 의 빌드를 트리거 할 수 있습니다.
 1. GitHub push : 이 리포지터리의 main 브랜치에 push 가 발생하면 자동으로 빌드/배포 합니다.
