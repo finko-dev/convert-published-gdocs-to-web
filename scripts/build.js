@@ -21,6 +21,25 @@ async function convert_gdoc(url) {
 	// fetch
 	const res = await axios.get(url);
 	let body = res.data
+	body = body.replace('</body>', `
+		 <style>
+		       #contents {
+		           width: 100%;
+		           margin: 0;
+		           padding: 0;
+		       }
+		       #contents .doc-content {
+		           padding: 0px;
+		           max-width: 1200px;
+		           padding: 0 5% 0 5%;
+		           margin: auto;
+		       }
+		       #contents .doc-content > p > span ~ img  {
+		           margin: auto;
+		       }
+		 </style>
+	</body>
+	`)
 	// start dom search
 	const $ = cheerio.load(body);
 	// remove script tags and <div id="banners">
