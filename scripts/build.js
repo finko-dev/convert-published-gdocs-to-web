@@ -40,6 +40,7 @@ async function convert_gdoc(url) {
 		 </style>
 	</body>
 	`)
+	body = body.replace('<head>', '<head> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>')
 	// start dom search
 	const $ = cheerio.load(body);
 	// remove script tags and <div id="banners">
