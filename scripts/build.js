@@ -37,6 +37,9 @@ async function convert_gdoc(url) {
 		       #contents .doc-content > p > span ~ img  {
 		           margin: auto;
 		       }
+	 		img {
+    			    width:100%;
+    			}
 		 </style>
 	</body>
 	`)
