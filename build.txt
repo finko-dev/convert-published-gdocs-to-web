@@ -9,4 +9,4 @@
 2022-12-24T17:29  by Solip
 2023-05-25T11:45  by Solip
 2023-08-02T23:36  by Solip - image reboot
-2023-10-11T11:13  by Beomsu - font 14 + font namum-godic test
+2023-10-11T11:13  by Beomsu - font 14 + font Noto Sans test
