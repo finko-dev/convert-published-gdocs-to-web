@@ -23,6 +23,7 @@ async function convert_gdoc(url) {
 	let body = res.data
 	body = body.replace('</body>', `
 		 <style>
+   		       p { margin-bottom:1em; }
 		       #contents {
 		           width: 100%;
 		           margin: 0;
