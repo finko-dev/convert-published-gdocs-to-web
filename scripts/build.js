@@ -23,6 +23,7 @@ async function convert_gdoc(url) {
 	let body = res.data
 	body = body.replace('</body>', `
 		 <style>
+   		       p { margin-bottom:1em; }
 		       #contents {
 		           width: 100%;
 		           margin: 0;
@@ -37,9 +38,13 @@ async function convert_gdoc(url) {
 		       #contents .doc-content > p > span ~ img  {
 		           margin: auto;
 		       }
+	 		img {
+    			    width:100%;
+    			}
 		 </style>
 	</body>
 	`)
+	body = body.replace('<head>', '<head> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>')
 	// start dom search
 	const $ = cheerio.load(body);
 	// remove script tags and <div id="banners">
