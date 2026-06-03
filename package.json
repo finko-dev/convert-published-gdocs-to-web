@@ -5,7 +5,7 @@
     "build": "node scripts/build.js"
   },    
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.32.0",
     "cheerio": "^1.0.0-rc.10",
     "js-yaml": "^4.1.0",
     "node-fetch": "^3.1.1"
