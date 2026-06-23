@@ -50,7 +50,7 @@ async function convert_gdoc(url) {
 	// remove script tags and <div id="banners">
 	$("html").find("script,#banners").remove();
 	// Iterate all <a> tags
-	const reGdocPub = new RegExp('https://docs.google.com/.+?/pub');
+	const reGdocPub = new RegExp('https://docs\\.google\\.com/.+?/pub');
 	$("a").each(function (index, item) {
 		const ref = $(item);
 		let href = ref.attr('href');
