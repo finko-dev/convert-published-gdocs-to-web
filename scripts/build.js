@@ -4,7 +4,7 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 const yaml = require('js-yaml');
 
-const config = yaml.load(fs.readFileSync('_config.yml'));
+const config = yaml.load(fs.readFileSync('_config.yml', 'utf8'), { schema: yaml.JSON_SCHEMA });
 const DIST = config.output || 'dist';
 const BASE = config.base || '';
 const glinks = config.pageList.reduce((o,n) => ({...o, [n.url]: n}), {})
@@ -76,7 +76,7 @@ async function convert_gdoc(url) {
 					.trim()
 					.replace(/[\s_]+/g, "-")
 					.toLowerCase();
-				if (!key) throw `Can't find a key for ${href} with "${text.slice(10)}...`
+				if (!key) throw `Can't find a key for ${href} with "${text.slice(0, 10)}...`
 				loc = '/' + key
 				// register to list/queue
 				glinks[gdocPub] = { loc, url: gdocPub };
@@ -104,7 +104,13 @@ async function convert_gdoc(url) {
 // handle queue
 async function runQueue() {
 	while (queue.length !== 0) {
-		await convert_gdoc(queue.shift())
+		const items = queue.splice(0, queue.length);
+		const results = await Promise.allSettled(items.map((url) => convert_gdoc(url)));
+		const failed = results.filter((r) => r.status === 'rejected');
+		if (failed.length > 0) {
+			failed.forEach((r) => console.error(r.reason));
+			throw new Error(`Failed to process ${failed.length} URL(s)`);
+		}
 	}
 }
 
@@ -130,4 +136,3 @@ async function main() {
 
 // RUN!!
 main()
-
